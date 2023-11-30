@@ -1,3 +1,4 @@
+using Business.Services;
 using DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<Db>(options => options.UseSqlServer("server=(localdb)\\mssqllocaldb;database=MoviesDb;trusted_connection=true;"));
+
+builder.Services.AddScoped<IDirectorService, DirectorService>();
 
 var app = builder.Build();
 

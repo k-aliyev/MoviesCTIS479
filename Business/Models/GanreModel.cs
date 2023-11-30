@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable disable
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,7 @@ namespace Business.Models
 {
     public class GanreModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 

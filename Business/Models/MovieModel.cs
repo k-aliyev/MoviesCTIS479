@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable disable
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace Business.Models
 {
     public class MovieModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public short? Year { get; set; }
         public double Revenue { get; set; }
