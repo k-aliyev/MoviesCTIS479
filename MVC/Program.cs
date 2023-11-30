@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Db>(options => options.UseSqlServer("server=(localdb)\\mssqllocaldb;database=MoviesDb;trusted_connection=true;"));
 
 builder.Services.AddScoped<IDirectorService, DirectorService>();
+builder.Services.AddScoped<IGanreService, GanreService>();
 
 var app = builder.Build();
 
