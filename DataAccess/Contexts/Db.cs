@@ -12,8 +12,8 @@ namespace DataAccess.Contexts
     {
         public DbSet<Director> Directors { get; set; }
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Ganre> Ganres { get; set; }
-        public DbSet<MovieGanre> MovieGanres { get; set; }
+        public DbSet<Genra> Genras { get; set; }
+        public DbSet<MovieGenra> MovieGenras { get; set; }
 
         public Db(DbContextOptions options) : base(options)
         {

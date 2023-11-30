@@ -11,6 +11,6 @@ namespace DataAccess.Entities
         public double Revenue { get; set; }
         public int? DirectorId { get; set; }
         public Director Director { get; set; }
-        public List<MovieGanre> MovieGanres { get; set; }
+        public List<MovieGenra> MovieGenras { get; set; }
     }
 }

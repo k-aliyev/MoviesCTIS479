@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Entities
 {
-    public class Ganre : Record
+    public class Genra : Record
     {
         [MaxLength(75)]
         public string Name { get; set; }
-        List<MovieGanre> MovieGanres { get; set; }
+        public List<MovieGenra> MovieGenras { get; set; }
     }
 }

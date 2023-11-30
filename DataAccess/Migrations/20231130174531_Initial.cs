@@ -29,7 +29,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ganres",
+                name: "genras",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -39,7 +39,7 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ganres", x => x.Id);
+                    table.PrimaryKey("PK_genras", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,23 +65,23 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MovieGanres",
+                name: "Moviegenras",
                 columns: table => new
                 {
                     MovieId = table.Column<int>(type: "int", nullable: false),
-                    GanreId = table.Column<int>(type: "int", nullable: false)
+                    genraId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieGanres", x => new { x.MovieId, x.GanreId });
+                    table.PrimaryKey("PK_Moviegenras", x => new { x.MovieId, x.genraId });
                     table.ForeignKey(
-                        name: "FK_MovieGanres_Ganres_GanreId",
-                        column: x => x.GanreId,
-                        principalTable: "Ganres",
+                        name: "FK_Moviegenras_genras_genraId",
+                        column: x => x.genraId,
+                        principalTable: "genras",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovieGanres_Movies_MovieId",
+                        name: "FK_Moviegenras_Movies_MovieId",
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
@@ -89,9 +89,9 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieGanres_GanreId",
-                table: "MovieGanres",
-                column: "GanreId");
+                name: "IX_Moviegenras_genraId",
+                table: "Moviegenras",
+                column: "genraId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movies_DirectorId",
@@ -103,10 +103,10 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MovieGanres");
+                name: "Moviegenras");
 
             migrationBuilder.DropTable(
-                name: "Ganres");
+                name: "genras");
 
             migrationBuilder.DropTable(
                 name: "Movies");

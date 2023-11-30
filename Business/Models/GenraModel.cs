@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Models
 {
-    public class GanreModel
+    public class GenraModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

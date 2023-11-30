@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Db))]
-    [Migration("20231130174531_Initial")]
-    partial class Initial
+    [Migration("20231130202824_Initial2")]
+    partial class Initial2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Directors");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.genra", b =>
+            modelBuilder.Entity("DataAccess.Entities.Genra", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("genras");
+                    b.ToTable("Genras");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Movie", b =>
@@ -106,21 +106,21 @@ namespace DataAccess.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Moviegenra", b =>
+            modelBuilder.Entity("DataAccess.Entities.MovieGenra", b =>
                 {
                     b.Property<int>("MovieId")
                         .HasColumnType("int")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("genraId")
+                    b.Property<int>("GenraId")
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    b.HasKey("MovieId", "genraId");
+                    b.HasKey("MovieId", "GenraId");
 
-                    b.HasIndex("genraId");
+                    b.HasIndex("GenraId");
 
-                    b.ToTable("Moviegenras");
+                    b.ToTable("MovieGenras");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Movie", b =>
@@ -132,21 +132,21 @@ namespace DataAccess.Migrations
                     b.Navigation("Director");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.Moviegenra", b =>
+            modelBuilder.Entity("DataAccess.Entities.MovieGenra", b =>
                 {
-                    b.HasOne("DataAccess.Entities.genra", "genra")
-                        .WithMany()
-                        .HasForeignKey("genraId")
+                    b.HasOne("DataAccess.Entities.Genra", "Genra")
+                        .WithMany("MovieGenras")
+                        .HasForeignKey("GenraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DataAccess.Entities.Movie", "Movie")
-                        .WithMany("Moviegenras")
+                        .WithMany("MovieGenras")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("genra");
+                    b.Navigation("Genra");
 
                     b.Navigation("Movie");
                 });
@@ -156,9 +156,14 @@ namespace DataAccess.Migrations
                     b.Navigation("Movies");
                 });
 
+            modelBuilder.Entity("DataAccess.Entities.Genra", b =>
+                {
+                    b.Navigation("MovieGenras");
+                });
+
             modelBuilder.Entity("DataAccess.Entities.Movie", b =>
                 {
-                    b.Navigation("Moviegenras");
+                    b.Navigation("MovieGenras");
                 });
 #pragma warning restore 612, 618
         }

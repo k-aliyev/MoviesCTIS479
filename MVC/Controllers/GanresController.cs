@@ -5,37 +5,37 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Controllers
 {
-    public class GanresController : Controller
+    public class GenrasController : Controller
     {
-        private readonly IGanreService _ganreService;
+        private readonly IGenraService _genraService;
 
-        public GanresController(IGanreService ganreService)
+        public GenrasController(IGenraService genraService)
         {
-            _ganreService = ganreService;
+            _genraService = genraService;
         }
 
-        // GET: Ganres/List
+        // GET: Genras/List
         public IActionResult List()
         {
-            List<GanreModel> ganreList = _ganreService.Query().ToList();
-            return View("List", ganreList);
+            List<GenraModel> genraList = _genraService.Query().ToList();
+            return View("List", genraList);
         }
 
-        // GET: Ganres/Create
+        // GET: Genras/Create
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Ganres/Create
+        // POST: Genras/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(GanreModel ganre)
+        public IActionResult Create(GenraModel genra)
         {
             if (ModelState.IsValid)
             {
-                bool result = _ganreService.Add(ganre);
+                bool result = _genraService.Add(genra);
                 if (result)
                 {
                     TempData["Message"] = "Genre has been added.";
@@ -45,26 +45,26 @@ namespace MVC.Controllers
                 ModelState.AddModelError("", "Genre could not be added.");
             }
 
-            return View(ganre);
+            return View(genra);
         }
 
-        // GET: Ganres/Delete/5
+        // GET: Genras/Delete/5
         public IActionResult Delete(int id)
         {
-            GanreModel ganre = _ganreService.Query().SingleOrDefault(g => g.Id == id);
-            if (ganre == null)
+            GenraModel genra = _genraService.Query().SingleOrDefault(g => g.Id == id);
+            if (genra == null)
             {
                 return NotFound();
             }
 
-            return View(ganre);
+            return View(genra);
         }
 
-        // POST: Ganres/Delete
+        // POST: Genras/Delete
         [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            bool result = _ganreService.Delete(id);
+            bool result = _genraService.Delete(id);
             if (result)
             {
                 TempData["Message"] = "Genre has been deleted.";

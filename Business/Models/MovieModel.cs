@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,17 @@ namespace Business.Models
         public double Revenue { get; set; }
 
         [DisplayName("Director")]
+        [Required]
         public int? DirectorId { get; set; }
 
-        [DisplayName("Ganres")]
-        public List<int> GanresIdsInput { get; set; }
+        [DisplayName("Director")]
+        public string DirectorOutput { get; set; }
 
-        [DisplayName("Ganres")]
-        public string GanresNamesOutput { get; set; }
+        [DisplayName("genras")]
+        public List<int> GenrasIdsInput { get; set; }
+
+        [DisplayName("genras")]
+        public string GenrasNamesOutput { get; set; }
     }
 
 }
