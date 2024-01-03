@@ -1,0 +1,84 @@
+﻿@using DataAccess.Enums;
+@model Business.Models.UserModel;
+
+@* @{
+    ViewData["Title"] = User.Identity.IsAuthenticated && User.IsInRole("admin") ? "Create User" : "Register User";
+} *@
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+
+		@using (Html.BeginForm()) @* default method: post *@
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(false, null, new { @class = "text-danger" })
+
+            <div class="row mb-3">
+				@Html.LabelFor(model => model.Name, new { @class="col-2 col-form-label", style = "font-weight:bold" })
+
+				<div class="col-5">
+					@Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter user name..." })@* for register and create user operations *@
+
+					@Html.ValidationMessageFor(u => u.Name, null, new { @class = "text-danger" })
+
+				</div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Password" class="col-2 col-form-label" style="font-weight:bold"></label>
+				<div class="col-5">
+					@Html.PasswordFor(u => u.Password, new { @class = "form-control", type = "password", placeholder = "Enter password..." })@* for register and create user operations *@
+
+					<span asp-validation-for="Password" class="text-danger"></span>
+				</div>
+            </div>
+
+			@if (@* User.IsInRole("admin") *@ 1 == 1) @* for admins creating a new user *@
+			{
+			
+				<div class="row mb-3">
+					<label asp-for="Status" class="col-2 col-form-label"></label>
+					<div class="col-5">
+
+						<div class="form-check form-check-inline">
+							@Html.RadioButton("Status", (int)Status.Junior, true, new { @class = "form-check-input", id = "status1" })
+							@Html.Label("Status", Status.Junior.ToString(), new { @for = "status1" })
+						</div>
+						<div class="form-check form-check-inline">
+							@Html.RadioButton("Status", (int)Status.Senior, new { @class = "form-check-input", id = "status2" })
+							@Html.Label("Status", Status.Senior.ToString(), new { @for = "status2" })
+						</div>
+						<div class="form-check form-check-inline">
+							@Html.RadioButton("Status", (int)Status.Master, new { @class = "form-check-input", id = "status3" })
+							@Html.Label("Status", Status.Master.ToString(), new { @for = "status3" })
+						</div>
+
+						<span asp-validation-for="Status" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label asp-for="RoleId" class="col-2 col-form-label"></label>
+					<div class="col-5">
+						@Html.DropDownListFor(m => m.RoleId, ViewData["Roles"] as SelectList, "-- Select --", new { @class = "form-select" })
+
+						<span asp-validation-for="RoleId" class="text-danger"></span>
+					</div>
+				</div>
+			}
+
+			<div class="row mb-3">
+				<div class="offset-2 col-5">
+					<input type="submit" value="Save" class="btn btn-primary" />
+					&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-outline-primary">Reset</button>
+					&nbsp;&nbsp;
+					<a asp-action="GetList">Back to List</a>
+				</div>
+            </div>
+        @* </form> *@
+		}
+    </div>
+</div>
